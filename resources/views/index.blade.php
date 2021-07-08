@@ -1,11 +1,11 @@
 @extends('template.template')
 @section('content')
-<h1 class="text-center">Easycoin</h1>
+<h1 class="text-center">Gerenciador de Finanças</h1>
 <hr>
 
 
-
 <div class="col-8 m-auto">
+    @csrf
     <table class="table table-hover text center">
         <thead>
             <tr>
@@ -19,51 +19,54 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($receita as $receita)
-            <tr>
-                
-                <td>receita</td>
-                <td>{{$receita->valor}} </td>
-                <td>{{$receita->recebido}} </td>
-                <td>{{$receita->quando}} </td>
-                <td>{{$receita->fixa}} </td>
-                <td>
-                    <a href="">
-                        <button class="btn btn-dark">Visualizar</button>
-                    </a>
-                    <a href="">
-                        <button class="btn btn-primary">Editar</button>
-                    </a>
-                    <a href="">
-                        <button class="btn btn-danger">Deletar</button>
-                    </a>
-                </td>
-            </tr>
+            @if(isset($receita))
+                    @foreach ($receita as $receita)
+                    <tr>
+                        
+                        <td>receita</td>
+                        <td>{{$receita->valor}} R$</td>
+                    
+                        <td>{{$receita->recebido}} </td>
+                        <td>{{$receita->quando}} </td>
+                        <td>{{$receita->fixa}} </td>
+                        <td>
+                            <a href="{{url("/index/$receita->id")}}">
+                                <button class="btn btn-dark">Visualizar</button>
+                            </a>
+                            <a href="{{url("index/receita/view/$receita->id")}}" class="js-del">
+                                <button class="btn btn-danger">Deletar</button>
+                            </a>
+                        </td>
+                    </tr>
+                    
+                    @endforeach
+            @endif
+            <h2 class="text-center">Balanço Total:
+              
             
-            @endforeach
-
-            @foreach ($despesa as $despesa)
-            <tr>
-               
-                <td>despesa</td>
-                <td>{{$despesa->valor}} </td>
-                <td>{{$despesa->pagou}} </td>
-                <td>{{$despesa->quando}} </td>
-                <td>{{$receita->fixo}} </td>
-                <td>
-                    <a href="">
-                        <button class="btn btn-dark">Visualizar</button>
-                    </a>
-                    <a href="">
-                        <button class="btn btn-primary">Editar</button>
-                    </a>
-                    <a href="">
-                        <button class="btn btn-danger">Deletar</button>
-                    </a>
-                </td>
-            </tr>
             
-            @endforeach
+            </h2>
+            @if(isset($despesa))
+                    @foreach ($despesa as $despesa)
+                    <tr>
+                    
+                        <td>despesa</td>
+                        <td>{{$despesa->valor}} R$</td>
+                        <td>{{$despesa->pagou}}  </td>
+                        <td>{{$despesa->quando}} </td>
+                        <td>{{$despesa->fixa}} </td>
+                        <td>
+                            <a href="{{url("index/$despesa->id")}}">
+                                <button class="btn btn-dark">Visualizar</button>
+                            </a>
+                            <a href="{{url("index/despesa/view/$despesa->id")}}" class="js-del">
+                                <button class="btn btn-danger">Deletar</button>
+                            </a>
+                        </td>
+                    </tr>
+                    
+                    @endforeach
+            @endif
         </tbody>
     </table>
     
@@ -72,21 +75,18 @@
     
 </div>
 <div class="text-center mt-5 mb-4">
-    <a href="">
+    <a href="{{url('/index/receita/create')}}">
         <button class="btn btn-success" type="button" 
         data-toggle="collapse" data-target="#collapseExample" 
         aria-expanded="false" aria-controls="collapseExample">
             Cadastrar Receita
         </button>
     </a>
-    {{-- <a href="">
+    <a href="{{url('/index/despesa/create')}}">
         <button class="btn btn-secondary">Cadastrar Despesa</button>
-    </a> --}}
+    </a>
+
 </div>
 
-<div class="collapse m-auto" id="collapseExample">
-    <div class="card card-body">
-      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-    </div>
-  </div>
+
 @endsection

@@ -6,11 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateModelBooksTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+
     public function up()
     {
         Schema::create('receita', function (Blueprint $table) {
@@ -20,18 +16,14 @@ class CreateModelBooksTable extends Migration
             $table->boolean('recebido');
             $table->date('quando');
             $table->boolean('fixa');
- # $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+
 
         });
 
 
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+
     public function down()
     {
         Schema::dropIfExists('receita');
