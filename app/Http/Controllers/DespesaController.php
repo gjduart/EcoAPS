@@ -19,7 +19,7 @@ class DespesaController extends Controller
        $despesa = $this-> objDespesa->all();
        $receita = $this-> objReceita->all();
        return view('index', compact('despesa','receita'));
-       #dd($this->objDespesa->find(1));
+  
     }
 
  

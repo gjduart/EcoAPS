@@ -41,10 +41,9 @@
                     
                     @endforeach
             @endif
-            <h2 class="text-center">Balanço Total:
-              
-            
-            
+        
+
+        
             </h2>
             @if(isset($despesa))
                     @foreach ($despesa as $despesa)
